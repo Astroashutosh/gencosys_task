@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\formController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ajaxController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,5 +33,11 @@ Route::get('/studentPanel.registeredStudent', [StudentController::class, 'regist
 // Ajax Task
 
 Route::resource('ajax', formController::class);
+Route::view('ajaxForm', 'ajax.create')->name('ajaxForm');
+
+Route::post('ajaxSubmit', [ajaxController::class, 'store'])->name('ajaxSubmit');
+Route::view('ajaxshow', 'ajax.show')->name('ajaxshow');
+Route::get('showajax', [ajaxController::class, 'show'])->name('showajax');
 
 require __DIR__.'/auth.php';
+
