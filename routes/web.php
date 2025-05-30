@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\formController;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\ajaxController;
+use App\Http\Controllers\ajaxController;  
+use App\Http\Controllers\contactController;  
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +39,13 @@ Route::view('ajaxForm', 'ajax.create')->name('ajaxForm');
 Route::post('ajaxSubmit', [ajaxController::class, 'store'])->name('ajaxSubmit');
 Route::view('ajaxshow', 'ajax.show')->name('ajaxshow');
 Route::get('showajax', [ajaxController::class, 'show'])->name('showajax');
+
+Route::resource('contact', contactController::class);;
+
+
+Route::get('/search', [contactController::class, 'searchForm'])->name('search');
+Route::post('/search', [contactController::class, 'getContact']);
+
 
 require __DIR__.'/auth.php';
 
